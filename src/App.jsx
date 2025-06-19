@@ -138,6 +138,13 @@ function App() {
       )}
     </div>
   );
+  <button
+  onClick={() => document.getElementById("openChat")?.click()}
+  className="fixed bottom-6 right-6 bg-blue-600 hover:bg-blue-700 text-white px-5 py-3 rounded-full shadow-lg z-50"
+>
+  Chat with a Consultant
+</button>
+
 }
 
 export default App;
