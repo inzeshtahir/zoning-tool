@@ -1,7 +1,7 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { zoningSummaries } from "./zoningData";
 import { fetchZoneCode } from "./fetchZoneCode";
-import AddressSearch from "./AddressSearch"; // <-- address autocomplete component
+import AddressSearch from "./AddressSearch";
 
 function App() {
   const [address, setAddress] = useState("");
@@ -12,6 +12,19 @@ function App() {
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [interest, setInterest] = useState("");
+
+  // 🧠 Load Karmaflow Chatbot Script
+  useEffect(() => {
+    const script = document.createElement("script");
+    script.src =
+      "https://chat.karmaflow.ai/widget/chat-widget.js?tenantId=67e4c2c170678a3b5323de00&agentId=681634b1b1854bc258596363&collapseWidth=767&linkId=openChat";
+    script.async = true;
+    document.body.appendChild(script);
+
+    const chatDiv = document.createElement("div");
+    chatDiv.id = "openChat";
+    document.body.appendChild(chatDiv);
+  }, []);
 
   const handleSubmitReport = () => {
     if (!name || !phone || !interest) {
@@ -102,13 +115,14 @@ function App() {
           >
             Submit Zoning Report Request
           </button>
-          <button
-  onClick={() => document.getElementById("openChat")?.click()}
-  className="fixed bottom-6 right-6 bg-blue-600 hover:bg-blue-700 text-white px-5 py-3 rounded-full shadow-lg z-50"
->
-  Chat with a Consultant
-</button>
 
+          {/* Chat Trigger */}
+          <button
+            onClick={() => document.getElementById("openChat")?.click()}
+            className="fixed bottom-6 right-6 bg-blue-600 hover:bg-blue-700 text-white px-5 py-3 rounded-full shadow-lg z-50"
+          >
+            Chat with a Consultant
+          </button>
         </div>
       )}
 
